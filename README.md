@@ -11,18 +11,18 @@
 1. **What is a PR?** *=> 2 points*
  - [ ] Program Result: the outcome of a programming effort available for testing
  - [ ] Public Relations: a practice of managing and influencing an organizational info to the public
- - [ ] Pull Request: a request to review the code of a developer prior to merging it main branch
+ - [x] Pull Request: a request to review the code of a developer prior to merging it main branch
  - [ ] Private Role: A security role that is used in internal system processing
 
 2. **What is the role of a service in nodejs server architecture?** *=> 2 points*
- - [ ] Get the request from the router, treat the request parameters, prepare the response of the server to the consumer
+ - [x] Get the request from the router, treat the request parameters, prepare the response of the server to the consumer
  - [ ] Keep state of a specific logic portion of the system, provide processing of the data passed from the different controllers, parse the data and returned the processed response
  - [ ] To be the first element in the system that should service the consumer for his CRUD request to the server
  - [ ] To provide services to the system that do not require a state but should be used across the whole system
 
 3. **What is INNER JOIN?** *=> 2 points*
  - [ ] A mechanism to link between to tables in the SQL query to bring data based on the same value in two tables. Allows NULL values on one on the sides of the JOIN
- - [ ] A mechanism to link between to tables in the SQL query to bring data based on the same value in two tables. Only non NULL values are accepted for both sides of the JOIN
+ - [x] A mechanism to link between to tables in the SQL query to bring data based on the same value in two tables. Only non NULL values are accepted for both sides of the JOIN
  - [ ] A way of executing to `foreach` loops in JS/TS while the internal loop uses values of the external loop
  - [ ] Such a term does not exist
 
@@ -30,11 +30,12 @@
  - [ ] 2xx
  - [ ] 3xx
  - [ ] 4xx
- - [ ] 5xx
+ - [x] 5xx
+
 
 5. **What is the correct flow a story?** *=> 2 points*
  - [ ] Software Detailed Design (SDD), Product design, QA review, UI design, Development, QA testing, Customer review
- - [ ] Customer request, Product design, UI design, SDD, QA review, Development, QA testing, Customer User Acceptance Testing (UAT)
+ - [x] Customer request, Product design, UI design, SDD, QA review, Development, QA testing, Customer User Acceptance Testing (UAT)
  - [ ] Product design, SDD, QA review, UI design, Development, QA testing, UAT
  - [ ] Customer request, UI design, Product design, UAT, QA review, Development, QA testing
 
@@ -42,45 +43,49 @@
  - [ ] Browser
  - [ ] Postman
  - [ ] Fiddler
- - [ ] All answers are correct
+ - [x] All answers are correct
 
 7. **What is the most secure way to connect to SQL Server?** *=> 2 points*
  - [ ] Integrated security
- - [ ] Mixed mode
+ - [x] Mixed mode
  - [ ] SQL Server login
  - [ ] Application role
 
 8. **What is the correct pair of a protocol and the port for secure HTTP communication?** *=> 2 points*
  - [ ] HTTP:80
  - [ ] HTTPS:80
- - [ ] HTTPS:443
+ - [x] HTTPS:443
  - [ ] HTTP:443
 
 9. **What is a trigger?** *=> 2 points*
- - [ ] Trigger is a piece of code executed by the database engine whenever some action is performed on a database object like tables, view, etc.
+ - [x] Trigger is a piece of code executed by the database engine whenever some action is performed on a database object like tables, view, etc.
  - [ ] Trigger is a method that is called JS/TS environment whenever a certain event is fired to complete an asynchronous code execution
  - [ ] Trigger is a processing being performed right after the merge of a code to main branch in order to run a build for the system
  - [ ] Trigger is the mechanism by which the router is sending its data to the controller in nodejs server
 
 10. **Why would you use the JWT token? (more than a single answer can be selected)** *=> 2 points*
- - [ ] JWT tokens are encrypted
+ - [x] JWT tokens are encrypted
  - [ ] It's a more secure way of handling authentication and authorization data than username and password
- - [ ] JWT tokens are signed and this signature can be verified uniquely
+ - [x] JWT tokens are signed and this signature can be verified uniquely
  - [ ] All answers are correct
 
 
 ## Section B: Please, explain the following terms the best way you can *=> 22 points*
 
 11. **Authentication & Authorization** *=> 7 points*
-
+	Authentication is a process of entering a system using username and password.
+	The system compares a username and password that were entered and compares it 
+	to the username/password which is stored in a DB. After user has passed authentication, 
+	authorization comes into play. Authorization defines which level of acces this user has.
 12. **Stored procedure** *=> 3 points*
-
+Stored procedure is a set of SQL instructions which are executed once and then stores in a DB.
+It helps to save time and resources when doing frequent requests and increases performance also.
 13. **Git rebase** *=> 4 points*
-
+Git rebase rearranges commits one by one from an alternative branch to the top of the main branch 
 14. **Generics** *=> 4 points*
-
+Generics are reusable components which could be used with a different types. 
 15. **Middleware** *=> 4 points*
-
+Middleware is a software which connects different comoponents and services
  
 ## Part II: Practice on paper *=> 45 points*
 
@@ -88,24 +93,16 @@
 
 16. **You received a bug stating the following: "Intermittently the following method results in a system getting stuck." You're required to find and fix the problem in this method:** *=> 10 points*
 
-		public static addMonths(date: Date, value: number): Date {
-		    let expectedMonth: number = date.getMonth() + value;
-		    if (expectedMonth > 12) {
-		        expectedMonth = expectedMonth % 12;
-		    }
-    
-		    if (expectedMonth < 0) {
-		        expectedMonth += 12;
-	        }
-    
-		    date.setMonth(date.getMonth() + value);
-	        const daysToAdd: number = date.getMonth() >  expectedMonth ? -1 : 1;
-	        while (date.getMonth() !== expectedMonth) {
-		        date.setDate(date.getDate() + daysToAdd);
-		    }
-    
-		    return  date;
-	    }
+function addMonths(date: Date, value: number): Date 
+{
+    let expectedMonth: number = date.getMonth() + value;
+  if (expectedMonth > 11) 
+        expectedMonth = expectedMonth % 12;
+
+    date.setMonth(expectedMonth);
+  if (date.getMonth() > expectedMonth) date.setDate(0);    
+    return date;
+}
 
 17. **Having the following DB tables diagram:** *=> 10 points*
 
@@ -121,12 +118,23 @@ You need to write a query that returns for each student his/her parents' informa
 
 18. **Write a method in JS/TS that gets as an argument an array of numbers and returns the sum of all array members**. *=> 5 points*
 
+	function sumArray(arr){
+		var sum = 0;
+		for (int i = 0; i < arr.length; i++){
+			sum = sum + arr.i;
+		}
+		return sum;
+	}
+
 19. **Explain the following piece of code:** *=> 5 points*
 
 		public static padLeft(input: number, places: number): string {
 			const zeroes: number = places - input.toString().length + 1;
 			return Array(+(zeroes > 0 && zeroes)).join("0") + input.toString();
 		}
+
+		This function gets two numbers: number1 and number2 and returns a number1 with number2 digits in it. If number1 < number2 it adds (number2 - number1) zeros to the end. 
+		If number1 = number 2 it returns number1. If number1 > number2 it returns first number2 digits in number1.
 
 20. **Fix the following code and fill the required gaps in it by the coding standards. The purpose of this code is to verify the user is a member of a specific role and in case the user is the user data is returned by the isUserPermitted() method. Treat the comments as actual code written that should not be changed:** *=> 15 points*
 
